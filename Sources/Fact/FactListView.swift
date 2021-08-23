@@ -13,9 +13,10 @@ struct FactListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.facts) { fact in
-                Text(fact.text)
+                FactView(fact: fact)
             }
             .navigationTitle("Dog Facts")
+            .edgesIgnoringSafeArea(.bottom)
             .onAppear {
               viewModel.load()
             }
