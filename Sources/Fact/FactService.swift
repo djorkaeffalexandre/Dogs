@@ -13,6 +13,19 @@ enum ServiceError: Error {
     case noData
     case jsonParse
     case unknown(Error)
+    
+    var code: Int {
+        switch self {
+        case .invalidURL:
+            return -1
+        case .noData:
+            return -2
+        case .jsonParse:
+            return -3
+        case .unknown:
+            return 0
+        }
+    }
 }
 
 struct FactService {

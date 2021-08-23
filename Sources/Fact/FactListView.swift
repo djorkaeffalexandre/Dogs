@@ -29,8 +29,8 @@ struct FactListView: View {
                 Color.clear.onAppear(perform: viewModel.load)
             case .loading:
                 ProgressView()
-            case .failure:
-                Color.clear.onAppear(perform: viewModel.load)
+            case .failure(let error):
+                ErrorView(error: error, retryHandler: viewModel.load)
             case .success(let facts):
                 List(facts) { fact in
                     FactView(fact: fact)

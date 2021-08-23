@@ -13,7 +13,7 @@ final class FactListViewModel: ObservableObject {
     enum State {
         case idle
         case loading
-        case failure(Error)
+        case failure(ServiceError)
         case success([Fact])
     }
     
