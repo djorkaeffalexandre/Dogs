@@ -17,7 +17,7 @@ struct FactListView: View {
             }
             .navigationTitle("Dog Facts")
             .onAppear {
-              viewModel.loadFacts()
+              viewModel.load()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
