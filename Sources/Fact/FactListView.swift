@@ -12,16 +12,31 @@ struct FactListView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.facts) { fact in
-                FactView(fact: fact)
-            }
-            .navigationTitle("Dog Facts")
-            .edgesIgnoringSafeArea(.bottom)
-            .onAppear {
-              viewModel.load()
-            }
+            content
+                .navigationTitle("Dog Facts")
+                .edgesIgnoringSafeArea(.bottom)
+                .onAppear {
+                    viewModel.load()
+                }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    var content: some View {
+        VStack {
+            switch viewModel.state {
+            case .idle:
+                Color.clear.onAppear(perform: viewModel.load)
+            case .loading:
+                ProgressView()
+            case .failure:
+                Color.clear.onAppear(perform: viewModel.load)
+            case .success(let facts):
+                List(facts) { fact in
+                    FactView(fact: fact)
+                }
+            }
+        }
     }
 }
 

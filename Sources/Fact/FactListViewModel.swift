@@ -10,17 +10,30 @@ import Foundation
 
 final class FactListViewModel: ObservableObject {
     
-    @Published private(set) var facts: [Fact] = []
+    enum State {
+        case idle
+        case loading
+        case failure(Error)
+        case success([Fact])
+    }
+    
+    @Published private(set) var state: State = .idle
     
     private let service = FactService()
     
-    private var task: AnyCancellable?
-    
     func load() {
-        task = service.loadFacts()
-            .replaceError(with: [])
-            .receive(on: RunLoop.main)
-            .assign(to: \FactListViewModel.facts, on: self)
+        state = .loading
+        
+        service.loadFacts() { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let facts):
+                    self?.state = .success(facts)
+                case .failure(let error):
+                    self?.state = .failure(error)
+                }
+            }
+        }
     }
     
 }

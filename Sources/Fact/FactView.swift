@@ -29,7 +29,7 @@ struct FactView: View {
                         .foregroundColor(Color.accentColor)
                 }
                 .sheet(isPresented: $isSharing) {
-                    ActivityViewController(activityItems: [fact.text])
+                    ActivityView(activityItems: [fact.text])
                 }
             }
             .padding()

@@ -1,5 +1,5 @@
 //
-//  ActivityViewController.swift
+//  ActivityView.swift
 //  Dogs
 //
 //  Created by Djorkaeff Alexandre Vilela Pereira on 8/23/21.
@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-struct ActivityViewController: UIViewControllerRepresentable {
+struct ActivityView: UIViewControllerRepresentable {
     
     private let activityItems: [Any]
     private let applicationActivities: [UIActivity]?
@@ -18,7 +18,7 @@ struct ActivityViewController: UIViewControllerRepresentable {
         self.applicationActivities = applicationActivities
     }
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
         return UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
     }
     
