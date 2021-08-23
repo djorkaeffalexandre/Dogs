@@ -16,6 +16,9 @@ let project = Project(
             sources: [
                 "Sources/**"
             ],
+            resources: [
+                "Resources/*.xcassets"
+            ],
             dependencies: [
                 
             ]
