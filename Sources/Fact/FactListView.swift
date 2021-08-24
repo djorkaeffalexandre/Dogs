@@ -15,9 +15,6 @@ struct FactListView: View {
             content
                 .navigationTitle("Dog Facts")
                 .edgesIgnoringSafeArea(.bottom)
-                .onAppear {
-                    viewModel.load()
-                }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
