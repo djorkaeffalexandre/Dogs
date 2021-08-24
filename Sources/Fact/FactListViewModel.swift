@@ -5,19 +5,16 @@
 //  Created by Djorkaeff Alexandre Vilela Pereira on 8/23/21.
 //
 
-import Combine
 import Foundation
 
-final class FactListViewModel: ObservableObject {
+protocol FactListViewModelProtocol: ObservableObject {
+    var state: FactListState { get }
+    func load()
+}
+
+final class FactListViewModel: FactListViewModelProtocol {
     
-    enum State {
-        case idle
-        case loading
-        case failure(ServiceError)
-        case success([Fact])
-    }
-    
-    @Published private(set) var state: State = .idle
+    @Published private(set) var state: FactListState = .idle
     
     private let service: FactServiceProtocol
     

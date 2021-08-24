@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct FactListView: View {
-    @StateObject var viewModel = FactListViewModel()
+struct FactListView<ViewModel: FactListViewModelProtocol>: View {
+    
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         NavigationView {
@@ -39,6 +40,8 @@ struct FactListView: View {
 
 struct FactListView_Previews: PreviewProvider {
     static var previews: some View {
-        FactListView()
+        ForEach(FactListViewModelPreview.allCases) {
+            FactListView(viewModel: $0)
+        }
     }
 }
