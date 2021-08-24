@@ -28,7 +28,11 @@ enum ServiceError: Error {
     }
 }
 
-struct FactService {
+protocol FactServiceProtocol {
+    func loadFacts(completion: @escaping (Result<[Fact], ServiceError>) -> Void)
+}
+
+struct FactService: FactServiceProtocol {
     
     private typealias Path = String
     

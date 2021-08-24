@@ -19,7 +19,11 @@ final class FactListViewModel: ObservableObject {
     
     @Published private(set) var state: State = .idle
     
-    private let service = FactService()
+    private let service: FactServiceProtocol
+    
+    init(service: FactServiceProtocol = FactService()) {
+        self.service = service
+    }
     
     func load() {
         state = .loading
